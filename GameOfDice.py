@@ -14,11 +14,12 @@ Computer winning average must be close to 70%
 
 
 The idea I had for this implementation was to allow the computer to throw multiple times if it knows it will lose. This can only be done during a round where human throws first, to maintain the illusion 
-that the game is fair. If computer goes second, it knows the result of the human throw, and can therefore throw an additional number of times behind the scenes. 
-To get the desired result of a ~70% winrate, I decided to tweak the number of times that the computer is allowed to perform additional throws. I found that allowing the computer to throw up to 8 
-times allowed it to maintain a close to 70% winrate. It still appears fair, as the human does sometimes win when they go first, as the computer sometimes does not win even when allowed 7 additional throws,
-so it is not too obvious that there is something going on behind the scenes. 
-It should be mentioned that the way I interpereted the winrate discounts the number of draws, and only counts wins and losses. The winrate of the computer is therefore calculated as such 
+that the game is fair. Therefore there is a 50% chance of either party winning during a round where the computer throws first. If computer goes second, it knows the result of the human throw, and can 
+therefore throw an additional number of times behind the scenes. 
+To get the desired result of a ~70% winrate, I decided to tweak the number of times that the computer can perform additional throws. I found that allowing the computer to throw up to 8 
+times allowed it to maintain a close to 70% winrate. It still appears fair, as the human does sometimes win when they go first, because the computer still loses occasionally even when allowed 7 additional 
+throws, so it is not too obvious that there is something fishy going on. 
+It should be mentioned that the way I interpereted the winrate discounts the number of draws, and only counts wins and losses. The winrate of the computer is therefore calculated as such: 
 	Computer winrate / Number of times a game resulted in a win for either party 
 '''
 
