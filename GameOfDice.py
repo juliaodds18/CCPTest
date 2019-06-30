@@ -17,18 +17,36 @@ from random import randint
 # If lastTurn == 0, computer played first last round. If lastTurn == 1, human played first last round 
 last_turn = 0
 
-def game(): 
-	while True: 
+def game(num_rounds): 
+	i = 0
+	compWins = 0
+	humanWins = 0
+	draws = 0
+
+	while i < num_rounds: 
 		winner = round()
 		print(winner)
+		i+= 1
+
+		if (winner == 'Computer wins'): 
+			compWins+= 1
+		elif winner == 'Draw':
+			draws += 1
+		else:
+			humanWins += 1
+
+
+	print(compWins)
+	print(humanWins)
+	print(draws)
+	print(float(compWins) / float(compWins + humanWins))
 
 def round(): 
-	#Determine who'se turn it is 
+	#Determine whose turn it is 
 
 	whose_turn()
 	# Computer goes first
 	if last_turn == 0:
-		# Computer goes first
 		cpu_throw = dice_throw()
 		human_throw = dice_throw()
 		winner = determine_winner(cpu_throw, human_throw)
@@ -36,9 +54,7 @@ def round():
 
 	# Human goes first
 	else:
-		human_throw = dice_throw()
-		cpu_throw = dice_throw()
-		winner = determine_winner(cpu_throw, human_throw)		
+		winner = comp_cheats()	
 		return winner
 
 
@@ -50,8 +66,6 @@ def whose_turn():
 		last_turn = 0
 
 
-
-
 def dice_throw(): 
 	throw = []
 	throw.append(randint(1, 6))
@@ -59,6 +73,23 @@ def dice_throw():
 	return throw
 
 
+def comp_cheats(): 
+	human_throw = dice_throw() 
+	winner = ''
+	i = 0
+	while i < 8: 
+		print(i)
+		cpu_throw = dice_throw()
+		winner = determine_winner(cpu_throw, human_throw)
+		if (winner == 'Computer wins'): 
+
+			print('COMPUTER CHEATED AND WON')
+			break
+		else:
+			i+= 1
+	return winner
+
+	
 
 def determine_winner(cpu_throw, human_throw):
 	# Check if computer has double 
@@ -96,4 +127,5 @@ def determine_winner(cpu_throw, human_throw):
 
 
 
-game()
+num_rounds = 1000
+game(num_rounds)
