@@ -1,3 +1,5 @@
+import math
+
 class Point(object):
 	def __init__(self, init_x=0.0, init_y=0.0):
 		self.x = init_x
@@ -14,8 +16,18 @@ def is_point_within_dist_of_rect(rect=Rectangle(), point=Point(), dist=0.0):
 	# Return value should be True or False.
 	
 	# TO DO: Check if point falls within dist of rec 
-	# First iteration: Check if point is within the area of rect 
+	# First check if point is within the area of rect 
+	ret_value = is_point_within_rectangle(rect, point)
 
+	# If the point is not within the rect, then check if it falls within dist of rect
+	if (ret_value == False):
+		is_point_within_dist(rect, point, dist)
+		
+		
+	return False 
+	
+
+def is_point_within_rectangle(rect, point): 
 	# Find the location of the bottom right point 
 	bottom_right = Point(rect.bottom_left.x + rect.width, rect.bottom_left.y)
 	# Find the location of the top left point 
@@ -33,7 +45,19 @@ def is_point_within_dist_of_rect(rect=Rectangle(), point=Point(), dist=0.0):
 	return False
 
 
+def is_point_within_dist(rect, point, dist):
+	retVal = dist_between_points(point, Point(2.0, 2.0))
+	print(retVal)
+
+
+
+def dist_between_points(point1, point2): 
+	# Formula: Sqrt((x2 - x1)^2 + (y2 - y1)^2)
+	x_point = math.pow(point2.x - point1.x, 2)
+	y_point = math.pow(point2.y - point1.y, 2)
+	return math.sqrt(x_point + y_point)
+
 
 rect = Rectangle(0.0, 0.0, 1.0, 1.0)
-point = Point(1.0, 1.0)
+point = Point(2.0, 0.5)
 is_point_within_dist_of_rect(rect, point)
