@@ -89,7 +89,41 @@ def comp_cheats():
 			i+= 1
 	return winner
 
-	
+
+
+''' Second iteration, cpu throws indefinitely until they win, does not work well
+	human_throw = dice_throw()
+	i = 0
+	while True: 
+		print('Computer has thrown this many times')
+		print(i)
+		cpu_throw = dice_throw()
+		winner = determine_winner(cpu_throw, human_throw)
+		if winner == 'Computer wins':
+			break
+		i += 1
+
+	return winner 
+'''
+
+
+''' First iteration, requires 8 throws to maintain a 0.7 winrate
+	human_throw = dice_throw() 
+	winner = ''
+	i = 0
+	while i < 8: 
+		print(i)
+		cpu_throw = dice_throw()
+		winner = determine_winner(cpu_throw, human_throw)
+		if (winner == 'Computer wins'): 
+
+			print('COMPUTER CHEATED AND WON')
+			break
+		else:
+			i+= 1
+	return winner
+'''
+
 
 def determine_winner(cpu_throw, human_throw):
 	# Check if computer has double 
@@ -127,5 +161,5 @@ def determine_winner(cpu_throw, human_throw):
 
 
 
-num_rounds = 1000
+num_rounds = 100
 game(num_rounds)
