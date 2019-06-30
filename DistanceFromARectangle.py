@@ -39,9 +39,9 @@ def is_point_within_dist_of_rect(rect=Rectangle(), point=Point(), dist=0.0):
 		# Next, check point outside right x-boundary
 		elif (point.x >= rect.bottom_left.x + rect.width):
 			# Again, find points with maximum and minimum y-values possible
-			x_dist = rect.bottom_left.x + rect.width + point.x
-			min_y = rect.bottom_left.y - math.sqrt(x_dist**2 - dist**2)
-			max_y = rect.bottom_left.y + rect.height + math.sqrt(x_dist**2 - dist**2)
+			x_dist = point.x - rect.bottom_left.x - rect.width 
+			min_y = rect.bottom_left.y - math.sqrt(dist**2 - x_dist**2)
+			max_y = rect.bottom_left.y + rect.height + math.sqrt(dist**2 - x_dist**2)
 
 			if (point.y >= min_y and point.y <= max_y): 
 				return True
@@ -59,8 +59,57 @@ def is_point_within_dist_of_rect(rect=Rectangle(), point=Point(), dist=0.0):
 			else:
 				return False	
 
+	else: 
+		return False
 
+# Test cases 
 rect = Rectangle(0.0, 0.0, 1.0, 1.0)
-point = Point(1.7, -0.7)
+point = Point(0.0, 0.0)
+print("Point: (0.0, 0.0), Expected: True")
 print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(1.0, 1.0)
+print("Point: (1.0, 1.0), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(0.5, 0.5)
+print("Point: (0.5, 0.5), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(2.0, 2.0)
+print("Point: (2.0, 2.0), Expected: False")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(-0.7, -0.7)
+print("Point: (-0.7, -0.7), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(-0.8, -0.8)
+print("Point: (-0.8, -0.8), Expected: False")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(1.7, -0.7)
+print("Point: (1.7, -0.7), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(1.8, -0.8)
+print("Point: (1.8, -0.8), Expected: False")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(1.7, 1.7)
+print("Point: (1.7, 1.7), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(1.8, 1.8)
+print("Point: (1.8, 1.8), Expected: False")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(-0.7, 1.7)
+print("Point: (-0.7, 1.7), Expected: True")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
+point = Point(-0.8, 1.8)
+print("Point: (-0.8, 1.8), Expected: False")
+print(is_point_within_dist_of_rect(rect, point, 1.0))
+
 
